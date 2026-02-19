@@ -5,7 +5,7 @@
     <!--begin::Brand-->
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <!--begin::Logo-->
-        <a href="/admin/dashboard">
+        <a href="{{ route('admin.dashboard') }}">
             <img alt="Logo" src="{{ asset('assets/logo/logo.png') }}" class="h-25px logo" />
             <strong class="text-black">Luxur Men Salon</strong>
         </a>
@@ -43,7 +43,7 @@
                 id="#kt_aside_menu" data-kt-menu="true">
 
                 <div class="menu-item">
-                    <a class="menu-link {{ Request::is('admin/dashboard') ? 'active' : '' }}" href="/admin/dashboard">
+                    <a class="menu-link {{ Request::is('admin/dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
                         <span class="menu-icon">
                             <i class="bi bi-speedometer2 fs-3 text-primary"></i>
                         </span>

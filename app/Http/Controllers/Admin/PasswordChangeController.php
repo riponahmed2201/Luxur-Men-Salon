@@ -40,7 +40,7 @@ class PasswordChangeController extends Controller
                     ]);
                     Auth::logout();
                     notify()->success('Password was changed successfully.', 'Success');
-                    return redirect('/admin/login');
+                    return redirect()->route('admin.login');
                 } else {
                     notify()->warning('New password can not be same as old password.', 'Warning');
                 }

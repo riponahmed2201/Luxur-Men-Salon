@@ -11,37 +11,36 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ExpenseController;
 use Illuminate\Support\Facades\Route;
 
-//Login
-Route::get('/', [LoginController::class, 'showLoginForm']);
-Route::post('/login', [LoginController::class, 'login'])->name('admin.login');
+// Redirect root to current login status
+Route::get('/', function () {
+    return redirect()->route('admin.login');
+});
 
-Route::middleware(['admin', 'prevent.back.history', 'xss'])->group(function () {
+// Admin Routes
+Route::prefix('admin')->group(function () {
+    // Login
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('login', [LoginController::class, 'login'])->name('admin.login.submit');
 
-    Route::post('logout', [LoginController::class, 'logout'])->name('admin.logout');
+    Route::middleware(['admin', 'prevent.back.history', 'xss'])->group(function () {
+        Route::post('logout', [LoginController::class, 'logout'])->name('admin.logout');
 
-    //Password
-    Route::get('password-change', [PasswordChangeController::class, 'passwordChange'])->name('admin.passwordChange');
-    Route::put('password/update', [PasswordChangeController::class, 'updatePassword'])->name('admin.password.update');
+        // Dashboard
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-    //Profile
-    Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
-    Route::put('profile/update', [ProfileController::class, 'update'])->name('admin.profile.update');
+        // Profile
+        Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
+        Route::put('profile/update', [ProfileController::class, 'update'])->name('admin.profile.update');
 
-    //Dashboard
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+        // Password Change
+        Route::get('password-change', [PasswordChangeController::class, 'passwordChange'])->name('admin.passwordChange');
+        Route::put('password/update', [PasswordChangeController::class, 'updatePassword'])->name('admin.password.update');
 
-    //Services
-    Route::resource('services', ServiceController::class)->names('admin.services');
-
-    //Employees
-    Route::resource('employees', EmployeeController::class)->names('admin.employees');
-
-    //Billings
-    Route::resource('billings', BillingController::class)->names('admin.billings');
-
-    //Reports
-    Route::get('reports', [ReportController::class, 'index'])->name('admin.reports.index');
-
-    //Expenses
-    Route::resource('expenses', ExpenseController::class)->names('admin.expenses');
+        // Modules
+        Route::resource('services', ServiceController::class)->names('admin.services');
+        Route::resource('employees', EmployeeController::class)->names('admin.employees');
+        Route::resource('billings', BillingController::class)->names('admin.billings');
+        Route::get('reports', [ReportController::class, 'index'])->name('admin.reports.index');
+        Route::resource('expenses', ExpenseController::class)->names('admin.expenses');
+    });
 });

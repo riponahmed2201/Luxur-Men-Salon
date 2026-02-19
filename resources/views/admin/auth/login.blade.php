@@ -53,7 +53,7 @@
             <!--begin::Content-->
             <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
                 <!--begin::Logo-->
-                <a href="/admin/login" class="mb-12">
+                <a href="{{ route('admin.login') }}" class="mb-12">
                     <img alt="Logo" src="{{ asset('assets/logo/logo.png') }}" class="h-40px" />
                     <strong>Luxur Men Salon</strong>
                 </a>

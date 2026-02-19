@@ -68,6 +68,8 @@
     <!-- include izitoast vendor -->
     @include('vendor.lara-izitoast.toast')
 
+    @stack('scripts')
+
 </body>
 <!--end::Body-->
 

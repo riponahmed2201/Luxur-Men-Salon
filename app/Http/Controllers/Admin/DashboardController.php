@@ -22,19 +22,41 @@ class DashboardController extends Controller
         $totalEmployees = Employee::count();
         $totalServices = Service::count();
 
-        // Simple Profit/Loss summary for current month
+        // Profit/Loss
         $monthlyExpenses = \App\Models\Expense::whereMonth('expense_date', Carbon::now()->month)
             ->whereYear('expense_date', Carbon::now()->year)
             ->sum('amount');
         $monthlySalaries = Employee::sum('monthly_salary');
         $monthlyProfit = $thisMonthIncome - ($monthlyExpenses + $monthlySalaries);
 
+        // 7-day sales trend
+        $salesTrend = [];
+        $salesLabels = [];
+        for ($i = 6; $i >= 0; $i--) {
+            $date = Carbon::today()->subDays($i);
+            $salesLabels[] = $date->format('D, d M');
+            $salesTrend[] = Billing::whereDate('created_at', $date)->sum('net_amount');
+        }
+
+        // Recent Billings
+        $recentBillings = Billing::latest()->take(5)->get();
+
+        // Popular Services (Top 5)
+        $popularServices = Service::withCount('billingItems')
+            ->orderBy('billing_items_count', 'desc')
+            ->take(5)
+            ->get();
+
         return view('admin.dashboard', compact(
             'todaySale',
             'thisMonthIncome',
             'totalEmployees',
             'totalServices',
-            'monthlyProfit'
+            'monthlyProfit',
+            'salesTrend',
+            'salesLabels',
+            'recentBillings',
+            'popularServices'
         ));
     }
 }
