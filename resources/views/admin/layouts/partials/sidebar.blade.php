@@ -7,7 +7,7 @@
         <!--begin::Logo-->
         <a href="/admin/dashboard">
             <img alt="Logo" src="{{ asset('assets/logo/logo.png') }}" class="h-25px logo" />
-            <strong class="text-black">Idea Architect Ltd</strong>
+            <strong class="text-black">Luxur Men Salon</strong>
         </a>
         <!--end::Logo-->
         <!--begin::Aside toggler-->
@@ -43,12 +43,6 @@
                 id="#kt_aside_menu" data-kt-menu="true">
 
                 <div class="menu-item">
-                    <div class="menu-content pt-8 pb-2">
-                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">🧑‍💼 General</span>
-                    </div>
-                </div>
-
-                <div class="menu-item">
                     <a class="menu-link {{ Request::is('admin/dashboard') ? 'active' : '' }}" href="/admin/dashboard">
                         <span class="menu-icon">
                             <i class="bi bi-speedometer2 fs-3 text-primary"></i>
@@ -58,151 +52,78 @@
                 </div>
 
                 <div class="menu-item">
-                    <a class="menu-link {{ Request::is('admin/profile') ? 'active' : '' }}"
-                        href="/admin/profile">
-                        <span class="menu-icon">
-                            <i class="bi bi-person fs-3 text-info"></i>
-                        </span>
-                        <span class="menu-title">Profile</span>
-                    </a>
-                </div>
-
-                <div class="menu-item">
-                    <a class="menu-link {{ Request::is('admin/users*') ? 'active' : '' }}" href="/admin/users">
-                        <span class="menu-icon">
-                            <i class="bi bi-people fs-3 text-danger"></i>
-                        </span>
-                        <span class="menu-title">Team Members</span>
-                    </a>
-                </div>
-
-                <div class="menu-item">
                     <div class="menu-content pt-8 pb-2">
-                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">💼 Business Content</span>
-                    </div>
-                </div>
-
-                <div class="menu-item">
-                    <a class="menu-link {{ Request::is('admin/partners*') ? 'active' : '' }}" href="/admin/partners">
-                        <span class="menu-icon">
-                            <i class="bi bi-people fs-3 text-success"></i>
-                        </span>
-                        <span class="menu-title">Partners</span>
-                    </a>
-                </div>
-
-                <div class="menu-item">
-                    <a class="menu-link {{ Request::is('admin/sliders*') ? 'active' : '' }}" href="/admin/sliders">
-                        <span class="menu-icon">
-                            <i class="bi bi-images fs-3 text-warning"></i>
-                        </span>
-                        <span class="menu-title">Sliders</span>
-                    </a>
-                </div>
-
-                <div class="menu-item">
-                    <div class="menu-content pt-8 pb-2">
-                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">🎨 Portfolio & Media</span>
-                    </div>
-                </div>
-
-                <div class="menu-item">
-                    <a class="menu-link {{ Request::is('admin/portfolios*') ? 'active' : '' }}"
-                        href="/admin/portfolios">
-                        <span class="menu-icon">
-                            <i class="bi bi-briefcase fs-3 text-info"></i>
-                        </span>
-                        <span class="menu-title">Portfolios</span>
-                    </a>
-                </div>
-
-                <div class="menu-item">
-                    <a class="menu-link {{ Request::is('admin/projects*') ? 'active' : '' }}" href="/admin/projects">
-                        <span class="menu-icon">
-                            <i class="bi bi-kanban fs-3 text-success"></i>
-                        </span>
-                        <span class="menu-title">Projects</span>
-                    </a>
-                </div>
-
-                <div class="menu-item">
-                    <a class="menu-link {{ Request::is('admin/videos*') ? 'active' : '' }}" href="/admin/videos">
-                        <span class="menu-icon">
-                            <i class="bi bi-camera-video fs-3 text-danger"></i>
-                        </span>
-                        <span class="menu-title">Videos</span>
-                    </a>
-                </div>
-
-                <div class="menu-item">
-                    <div class="menu-content pt-8 pb-2">
-                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">🛠 Services</span>
+                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">💇‍♂️ Salon Management</span>
                     </div>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link {{ Request::is('admin/service-categories*') ? 'active' : '' }}"
-                        href="/admin/service-categories">
-                        <span class="menu-icon">
-                            <i class="bi bi-layers fs-3 text-primary"></i>
-                        </span>
-                        <span class="menu-title">Service Categories</span>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a class="menu-link {{ Request::is('admin/services*') ? 'active' : '' }}" href="/admin/services">
+                    <a class="menu-link {{ Request::is('admin/services*') ? 'active' : '' }}" href="{{ route('admin.services.index') }}">
                         <span class="menu-icon">
                             <i class="bi bi-tools fs-3 text-info"></i>
                         </span>
                         <span class="menu-title">Services</span>
                     </a>
                 </div>
-
                 <div class="menu-item">
-                    <div class="menu-content pt-8 pb-2">
-                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">🏷 Tags & Blogs</span>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <a class="menu-link {{ Request::is('admin/tags') ? 'active' : '' }}" href="/admin/tags">
+                    <a class="menu-link {{ Request::is('admin/employees*') ? 'active' : '' }}" href="{{ route('admin.employees.index') }}">
                         <span class="menu-icon">
-                            <i class="bi bi-tags fs-3 text-success"></i>
+                            <i class="bi bi-people fs-3 text-danger"></i>
                         </span>
-                        <span class="menu-title">Tags</span>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a class="menu-link {{ Request::is('admin/blogs') ? 'active' : '' }}" href="admin/blogs">
-                        <span class="menu-icon">
-                            <i class="bi bi-journal-text fs-3 text-danger"></i>
-                        </span>
-                        <span class="menu-title">Blogs</span>
+                        <span class="menu-title">Employees</span>
                     </a>
                 </div>
 
-                {{-- <div class="menu-item">
+                <div class="menu-item">
                     <div class="menu-content pt-8 pb-2">
-                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">Settings</span>
+                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">🧾 Billing & Accounts</span>
                     </div>
                 </div>
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                    <span class="menu-link">
+                <div class="menu-item">
+                    <a class="menu-link {{ Request::is('admin/billings*') ? 'active' : '' }}" href="{{ route('admin.billings.index') }}">
                         <span class="menu-icon">
-                            <i class="bi-chat-left fs-3"></i>
+                            <i class="bi bi-receipt fs-3 text-success"></i>
                         </span>
-                        <span class="menu-title">Blank</span>
-                        <span class="menu-arrow"></span>
-                    </span>
-                    <div class="menu-sub menu-sub-accordion">
-                        <div class="menu-item">
-                            <a class="menu-link" href="../../demo1/dist/apps/file-manager/folders.html">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Folders</span>
-                            </a>
-                        </div>
+                        <span class="menu-title">Billing (Receipt)</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ Request::is('admin/reports*') ? 'active' : '' }}" href="{{ route('admin.reports.index') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-graph-up fs-3 text-warning"></i>
+                        </span>
+                        <span class="menu-title">Accounts & Reports</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ Request::is('admin/expenses*') ? 'active' : '' }}" href="{{ route('admin.expenses.index') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-wallet2 fs-3 text-primary"></i>
+                        </span>
+                        <span class="menu-title">Daily Expenses</span>
+                    </a>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-content pt-8 pb-2">
+                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">⚙️ Settings</span>
                     </div>
-                </div> --}}
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ Request::is('admin/profile') ? 'active' : '' }}" href="{{ route('admin.profile') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-person fs-3 text-primary"></i>
+                        </span>
+                        <span class="menu-title">Profile</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ Request::is('admin/password-change') ? 'active' : '' }}" href="{{ route('admin.passwordChange') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-shield-lock fs-3 text-dark"></i>
+                        </span>
+                        <span class="menu-title">Password Change</span>
+                    </a>
+                </div>
             </div>
             <!--end::Menu-->
         </div>

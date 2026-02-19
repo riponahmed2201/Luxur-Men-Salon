@@ -5,7 +5,7 @@
 
 <head>
     <base href="../../">
-    <title>Idea Architect Limited | Admin</title>
+    <title>Luxur Men Salon | Admin</title>
 
     <!--Meta-->
     @include('admin.layouts.partials.meta')
