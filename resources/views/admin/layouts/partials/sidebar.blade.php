@@ -5,9 +5,8 @@
     <!--begin::Brand-->
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <!--begin::Logo-->
-        <a href="{{ route('admin.dashboard') }}">
-            <img alt="Logo" src="{{ asset('assets/logo/logo.png') }}" class="h-25px logo" />
-            <strong class="text-black">Luxur Men Salon</strong>
+        <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center py-2">
+            <img alt="Logo" src="{{ asset('assets/logo/logo.png') }}" class="h-35px logo" />
         </a>
         <!--end::Logo-->
         <!--begin::Aside toggler-->

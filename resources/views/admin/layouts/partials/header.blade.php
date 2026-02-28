@@ -24,7 +24,6 @@
         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
             <a href="{{ route('admin.dashboard') }}" class="d-lg-none">
                 <img alt="Logo" src="{{ asset('assets/logo/logo.png') }}" class="h-30px" />
-                <strong class="text-black ms-2">Luxur Men Salon</strong>
             </a>
         </div>
         <!--end::Mobile logo-->
