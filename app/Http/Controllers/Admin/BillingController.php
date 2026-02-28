@@ -29,7 +29,7 @@ class BillingController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'customer_name' => 'nullable|string|max:255',
+            'customer_name' => 'required|string|max:255',
             'customer_mobile' => 'nullable|string|max:20',
             'services' => 'required|array|min:1',
             'services.*' => 'exists:services,id',

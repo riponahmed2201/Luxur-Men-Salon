@@ -57,8 +57,11 @@
                         </div>
                         <div class="card-body">
                             <div class="mb-5">
-                                <label class="form-label">Customer Name</label>
-                                <input type="text" name="customer_name" class="form-control form-control-solid" placeholder="Optional" />
+                                <label class="form-label required">Customer Name</label>
+                                <input type="text" name="customer_name" class="form-control form-control-solid @error('customer_name') is-invalid @enderror" placeholder="Enter customer name" value="{{ old('customer_name') }}" required />
+                                @error('customer_name')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-5">
                                 <label class="form-label">Customer Mobile</label>
@@ -69,7 +72,7 @@
 
                             <div class="d-flex justify-content-between mb-2">
                                 <span class="fw-bold">Subtotal:</span>
-                                <span id="subtotal text-end">0.00 TK</span>
+                                <span id="subtotal" class="text-end">0.00 TK</span>
                                 <input type="hidden" id="subtotal-input" value="0">
                             </div>
                             <div class="mb-5">

@@ -26,4 +26,3 @@
 </script>
 
 <!-- Page Specific JavaScript -->
-@stack('scripts')
