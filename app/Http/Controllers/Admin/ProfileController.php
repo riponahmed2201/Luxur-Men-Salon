@@ -24,21 +24,44 @@ class ProfileController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore(Auth::user()->id)],
-            'phone' => ['required', 'string', 'max:20', Rule::unique('users')->ignore(Auth::user()->id)],
+            'phone' => ['nullable', 'string', 'max:20'],
+            'address' => ['nullable', 'string', 'max:500'],
+            'picture' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
 
-        $input = $request->only(['name', 'email', 'phone']);
-
         try {
+            $user = Auth::user();
 
-            $user = $request->user();
-            $user->fill($input);
-
-            if ($user->isDirty('email')) {
+            // Update User basic info
+            $user->name = $request->name;
+            if ($user->email !== $request->email) {
+                $user->email = $request->email;
                 $user->email_verified_at = null;
             }
-
             $user->save();
+
+            // Update or Create UserProfile
+            $profileData = [
+                'phone' => $request->phone,
+                'address' => $request->address,
+            ];
+
+            if ($request->hasFile('picture')) {
+                $file = $request->file('picture');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $path = $file->storeAs('profiles', $filename, 'public');
+                $profileData['picture'] = $path;
+
+                // Optional: Delete old picture if exists
+                if ($user->profile && $user->profile->picture) {
+                    \Illuminate\Support\Facades\Storage::disk('public')->delete($user->profile->picture);
+                }
+            }
+
+            $user->profile()->updateOrCreate(
+                ['user_id' => $user->id],
+                $profileData
+            );
 
             notify()->success("Profile updated successfully.", "Success");
             return back();

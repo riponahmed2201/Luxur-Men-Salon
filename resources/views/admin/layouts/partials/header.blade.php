@@ -59,7 +59,11 @@
                     <!--begin::Menu wrapper-->
                     <div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click"
                         data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-                        <img src="" alt="user" />
+                        @if(Auth::user()->profile && Auth::user()->profile->picture)
+                        <img src="{{ asset('storage/' . Auth::user()->profile->picture) }}" alt="user" />
+                        @else
+                        <img src="{{ asset('assets/media/avatars/blank.png') }}" alt="user" />
+                        @endif
                     </div>
                     <!--begin::User account menu-->
                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"
@@ -69,8 +73,11 @@
                             <div class="menu-content d-flex align-items-center px-3">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-50px me-5">
-                                    <img alt="Logo"
-                                        src="" />
+                                    @if(Auth::user()->profile && Auth::user()->profile->picture)
+                                    <img src="{{ asset('storage/' . Auth::user()->profile->picture) }}" alt="user" />
+                                    @else
+                                    <img src="{{ asset('assets/media/avatars/blank.png') }}" alt="user" />
+                                    @endif
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
@@ -79,7 +86,7 @@
                                         {{ Auth::user()->name }}
                                         <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span>
                                     </div>
-                                    <a href="javascript:void(0)"
+                                    <a href="{{ route('admin.profile') }}"
                                         class="fw-bold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</a>
                                 </div>
                                 <!--end::Username-->

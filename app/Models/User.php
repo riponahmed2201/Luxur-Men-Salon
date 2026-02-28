@@ -34,6 +34,14 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get the user's profile.
+     */
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>

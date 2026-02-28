@@ -15,7 +15,11 @@
                     <!--begin: Pic-->
                     <div class="me-7 mb-4">
                         <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                            <img src="{{ Storage::url($profile->profile->picture) }}" alt="{{ $profile->name }}" />
+                            @if($profile->profile && $profile->profile->picture)
+                            <img src="{{ asset('storage/' . $profile->profile->picture) }}" alt="{{ $profile->name }}" />
+                            @else
+                            <img src="{{ asset('assets/media/avatars/blank.png') }}" alt="{{ $profile->name }}" />
+                            @endif
                             <div
                                 class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px">
                             </div>

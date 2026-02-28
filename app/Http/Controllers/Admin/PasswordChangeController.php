@@ -16,7 +16,7 @@ class PasswordChangeController extends Controller
 {
     public function passwordChange(): View
     {
-        $profile = User::with('profile')->where('id', Auth::id())->first();
+        $profile = Auth::user()->load('profile');
 
         return view('admin.auth.password-change', compact('profile'));
     }
