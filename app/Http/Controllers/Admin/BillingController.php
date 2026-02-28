@@ -33,7 +33,8 @@ class BillingController extends Controller
             'customer_mobile' => 'nullable|string|max:20',
             'services' => 'required|array|min:1',
             'services.*' => 'exists:services,id',
-            'discount_amount' => 'nullable|numeric|min:0',
+            'discount_type' => 'required|in:fixed,percentage',
+            'discount_value' => 'nullable|numeric|min:0',
         ]);
 
         DB::beginTransaction();
@@ -50,15 +51,25 @@ class BillingController extends Controller
                 ];
             }
 
-            $discount = $request->discount_amount ?? 0;
-            $netAmount = $totalAmount - $discount;
+            $discountValue = $request->discount_value ?? 0;
+            $discountAmount = 0;
+
+            if ($request->discount_type === 'percentage') {
+                $discountAmount = ($totalAmount * $discountValue) / 100;
+            } else {
+                $discountAmount = $discountValue;
+            }
+
+            $netAmount = $totalAmount - $discountAmount;
 
             $billing = Billing::create([
                 'bill_number' => 'BILL-' . strtoupper(uniqid()),
                 'customer_name' => $request->customer_name,
                 'customer_mobile' => $request->customer_mobile,
                 'total_amount' => $totalAmount,
-                'discount_amount' => $discount,
+                'discount_type' => $request->discount_type,
+                'discount_value' => $discountValue,
+                'discount_amount' => $discountAmount,
                 'net_amount' => $netAmount,
             ]);
 

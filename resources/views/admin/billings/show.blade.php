@@ -60,7 +60,11 @@
                                                 <div class="text-end fw-bolder fs-6 text-gray-800">{{ number_format($billing->total_amount, 2) }}</div>
                                             </div>
                                             <div class="d-flex flex-stack mb-3">
-                                                <div class="fw-bold pe-10 text-gray-600 fs-7">Discount:</div>
+                                                <div class="fw-bold pe-10 text-gray-600 fs-7">Discount:
+                                                    @if($billing->discount_type === 'percentage')
+                                                    ({{ $billing->discount_value }}%)
+                                                    @endif
+                                                </div>
                                                 <div class="text-end fw-bolder fs-6 text-gray-800">- {{ number_format($billing->discount_amount, 2) }}</div>
                                             </div>
                                             <div class="d-flex flex-stack">

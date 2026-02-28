@@ -14,6 +14,8 @@ class Billing extends Model
         'customer_name',
         'customer_mobile',
         'total_amount',
+        'discount_type',
+        'discount_value',
         'discount_amount',
         'net_amount'
     ];

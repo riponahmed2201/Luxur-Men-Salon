@@ -75,9 +75,22 @@
                                 <span id="subtotal" class="text-end">0.00 TK</span>
                                 <input type="hidden" id="subtotal-input" value="0">
                             </div>
-                            <div class="mb-5">
-                                <label class="form-label">Discount Amount</label>
-                                <input type="number" step="0.01" name="discount_amount" id="discount-input" class="form-control form-control-solid" value="0" />
+                            <div class="row mb-5">
+                                <div class="col-md-6">
+                                    <label class="form-label">Discount Type</label>
+                                    <select name="discount_type" id="discount-type" class="form-select form-select-solid">
+                                        <option value="fixed">Fixed Amount (TK)</option>
+                                        <option value="percentage">Percentage (%)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Discount Value</label>
+                                    <input type="number" step="0.01" name="discount_value" id="discount-input" class="form-control form-control-solid" value="0" />
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="fw-bold">Total Discount:</span>
+                                <span id="discount-amount-display" class="text-danger">0.00 TK</span>
                             </div>
                             <div class="d-flex justify-content-between fs-2 fw-bolder text-primary">
                                 <span>Total:</span>
@@ -133,7 +146,7 @@
             updateTotals();
         });
 
-        $('#discount-input').on('input', function() {
+        $('#discount-input, #discount-type').on('input change', function() {
             updateTotals();
         });
 
@@ -143,10 +156,20 @@
                 subtotal += parseFloat($(this).data('price'));
             });
 
-            let discount = parseFloat($('#discount-input').val()) || 0;
-            let grandTotal = subtotal - discount;
+            let discountValue = parseFloat($('#discount-input').val()) || 0;
+            let discountType = $('#discount-type').val();
+            let discountAmount = 0;
+
+            if (discountType === 'percentage') {
+                discountAmount = (subtotal * discountValue) / 100;
+            } else {
+                discountAmount = discountValue;
+            }
+
+            let grandTotal = subtotal - discountAmount;
 
             $('#subtotal').text(subtotal.toFixed(2) + ' TK');
+            $('#discount-amount-display').text(discountAmount.toFixed(2) + ' TK');
             $('#grand-total').text(grandTotal.toFixed(2) + ' TK');
         }
     });
